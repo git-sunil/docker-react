@@ -6,4 +6,14 @@ before_install:
   - docker build -t dockersunil/docker-react -f Dockerfile.dev .
 script:
   - docker run -e CI=true dockersunil/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-south-1"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-ap-south-1-895836865828"
+  bucket_path: "docker-react"
+  on:
+    branch: master
   
